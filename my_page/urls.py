@@ -18,5 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('horoscope/', include("horoscope.urls"))   # импорт url конфига
+    path('horoscope/', include("horoscope.urls"))   # если в роуте есть horoscope, то дальнейший роут будет
+    # обрабатываться в соответствии с кодом из модуля horoscope.urls
 ]
