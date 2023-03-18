@@ -16,6 +16,14 @@ zodiac_dict = {
     'aquarius': "Водолей - одиннадцатый знак зодиака, планеты Уран и Сатурн (с 21 января по 19 февраля)",
     'pisces': "Рыбы - двенадцатый знак зодиака, планеты Юпитер (с 20 февраля по 20 марта)."
 }
+# elements_list = ["Fire", "Earth", "Air", "Water"]
+# earth_zodiac_list = ["taurus", "virgo", "capricorn"]
+elements_dict = {
+    'fire': ["aries", "leo", "sagittarius"],
+    'earth': ["taurus", "virgo", "capricorn"],
+    'air': ["gemini", "libra", "aquarius"],
+    'water': ["cancer", "scorpio", "pisces"],
+}
 
 
 def index(request):
@@ -23,13 +31,44 @@ def index(request):
     li_elements = ''
     for sign in zodiacs:
         redirect_url = reverse('horoscope-name', args=[sign])
-        li_elements += f"<li><a href = '{redirect_url}'>{sign.title()}</a></li>"
+        li_elements += f"<li><a href = '{redirect_url}'>{sign}</a></li>"
     response = f"""
     <ul>
         {li_elements}
     </ul>
     """
     return HttpResponse(li_elements)
+
+
+def get_types_of_zodiacs(request):
+    types = elements_dict.keys()
+    li_elements = ''
+    for type in types:
+        redirect_url = reverse('type-name', args=[type])
+        li_elements += f"<li><a href = '{redirect_url}'>{type.title()}</a></li>"
+    response = f"""
+    <ul>
+        {li_elements}
+    </ul>
+    """
+    return HttpResponse(li_elements)
+
+
+def get_info_about_type(request, type_zodiac: str):
+    zodiacs_of_type = elements_dict.get(type_zodiac, None)
+    if zodiacs_of_type:
+        li_elements = ''
+        for sign in zodiacs_of_type:
+            redirect_url = reverse('horoscope-name', args=[sign])
+            li_elements += f"<li><a href = '{redirect_url}'>{sign.title()}</a></li>"
+        response = f"""
+            <ul>
+                {li_elements}
+            </ul>
+            """
+        return HttpResponse(li_elements)
+    else:
+        return HttpResponseNotFound(f"Неизвестный тип зодиака - {type_zodiac}")
 
 
 def get_info_about_sign_zodiac(request, sign_zodiac: str):
