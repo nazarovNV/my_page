@@ -30,16 +30,11 @@ elements_dict = {
 
 def index(request):
     zodiacs = list(zodiac_dict)
-    li_elements = ''
-    for sign in zodiacs:
-        redirect_url = reverse('horoscope-name', args=[sign])
-        li_elements += f"<li><a href = '{redirect_url}'>{sign}</a></li>"
-    response = f"""
-    <ul>
-        {li_elements}
-    </ul>
-    """
-    return HttpResponse(li_elements)
+    # f"<li><a href = '{redirect_url}'>{sign}</a></li>"
+    context = {
+        'zodiacs': zodiacs
+    }
+    return render(request, 'horoscope/index.html', context=context)
 
 
 def get_types_of_zodiacs(request):
