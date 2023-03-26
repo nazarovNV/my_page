@@ -5,10 +5,13 @@
 {% endblock %}
 
 {% block content %}
-<h1>Приложение Гороскоп</h1>
-    {% if description_zodiac is None %}
-        <h2>Неправильный знак зодиака - {{sign|capfirst}}</h2>
-    {% else %}
-        <h2>{{ description_zodiac }}</h2>
-    {% endif %}
+    {% include 'includes/navbar.html' %}
+
+    <h1>Приложение Гороскоп</h1>
+        {% if description_zodiac is None %}
+            <h2>Неправильный знак зодиака - {{sign|capfirst}}</h2>
+        {% else %}
+            <h2>{{ description_zodiac }}</h2>
+        {% endif %}
+    {% include 'includes/navbar.html' %}
 {% endblock %}

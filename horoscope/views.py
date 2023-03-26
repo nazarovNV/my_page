@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
-from django.template.loader import render_to_string
-from dataclasses import dataclass
 
 zodiac_dict = {
     'aries': "Овен - первый знак зодиака, планета Марс (с 21 марта по 20 апреля).",
@@ -68,26 +66,11 @@ def get_info_about_type(request, type_zodiac: str):
         return HttpResponseNotFound(f"Неизвестный тип зодиака - {type_zodiac}")
 
 
-@dataclass
-class Person:
-    name: str
-    age: int
-
-    def __str__(self):
-        return f'This is {self.name}'
-
-
 def get_info_about_sign_zodiac(request, sign_zodiac: str):
     description = zodiac_dict.get(sign_zodiac)
     data = {
         "description_zodiac": description,
         "sign": sign_zodiac,
-        "my_int": 111,
-        "my_float": 111.5,
-        "my_list": ["wafawf", 1, 2],
-        "my_turple": ("wafawf", 1, 2),
-        "my_dict": {"name": "Jack", "age": 20},
-        "my_class": Person("Will", 55)
     }
     return render(request, "horoscope/info_zodiac.html", context=data)
 
