@@ -13,12 +13,11 @@
 {% block content %}
     {% include 'includes/navbar.html' %}
 
-    <h2>Content from info_zodiac.html</h2>
+    <h1>{{ sign_name }}</h1>
 
         {% if description_zodiac is None %}
             <h2>Неправильный знак зодиака - {{sign|capfirst}}</h2>
         {% else %}
             <h2>{{ description_zodiac }}</h2>
         {% endif %}
-    {% include 'includes/navbar.html' %}
 {% endblock %}

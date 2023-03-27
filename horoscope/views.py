@@ -68,9 +68,12 @@ def get_info_about_type(request, type_zodiac: str):
 
 def get_info_about_sign_zodiac(request, sign_zodiac: str):
     description = zodiac_dict.get(sign_zodiac)
+    zodiacs = list(zodiac_dict)
     data = {
         "description_zodiac": description,
         "sign": sign_zodiac,
+        "sign_name": description.split()[0],
+        "zodiacs": zodiacs
     }
     return render(request, "horoscope/info_zodiac.html", context=data)
 
